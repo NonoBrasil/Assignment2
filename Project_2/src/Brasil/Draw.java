@@ -4,7 +4,7 @@ import java.awt.*;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.JFrame;
+//import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import java.awt.event.ActionEvent;
@@ -16,63 +16,48 @@ public class Draw extends JPanel implements ActionListener {
 
 	public static String[][] tab_data = new String[20][2]; // table which save the temperature and the time
 	public static int condition = 0;
-	public JTextField cdelai=new JTextField("1");	//text area for retrieving the frequency written by the user
-	public JLabel lab=new JLabel("Period in second");
-	public JButton button;	//button for the dark mode
-	public JButton button2;	//button for the normal mode
+	public JTextField cdelai=new JTextField("1");
+	public JLabel lab=new JLabel("Delai in s");
 	public static String str=null;
 	public static int delai=1;
+	public static JButton openButton = new JButton("Switch mode");
+	public static int mode=0;
 	
 	public Draw() {
 		super();
-		/*cdelai.setPreferredSize(new Dimension(100,30));
+		cdelai.setPreferredSize(new Dimension(100,30));
+		this.add(openButton);
 		this.cdelai.setBounds(1000, 100, 90, 20);
+		this.add(openButton);
 		this.add(cdelai);
 		this.add(lab);
-		cdelai.addActionListener(this);*/
-		this.setPreferredSize(new Dimension(800,650));
-		period();
-		buttons();
-		
-	}
-	
-	public void period()
-	{
-		cdelai.setPreferredSize(new Dimension(100,30));
-		this.cdelai.setBounds(1000, 100, 90, 20);
-		this.add(cdelai);
-		this.add(lab);		
+		openButton.addActionListener(this);
 		cdelai.addActionListener(this);
 	}
 	
-	public void buttons()
-	{
-		this.button= new JButton();
-		this.button.setText("DARK MODE");
-		this.add(button);
-		this.button.addActionListener(this);
-		
-		this.button2= new JButton();
-		this.button2.setText("NORMAL MODE");
-		this.add(button2);
-		this.button2.addActionListener(this);
-	}
-	
 	public void actionPerformed(ActionEvent e) {
+		if (e.getActionCommand().equals("Switch mode")) 
+		{
+			mode++;
+			if (mode==0)
+			{
+				this.setBackground(Color.WHITE);
+			}
+			if (mode==1)
+			{
+				this.setBackground(Color.BLACK);
+			}
+			if (mode==2)
+			{
+				this.setBackground(Color.WHITE);
+				mode=0;
+			}
+			System.out.println("aaa");}
 		str=cdelai.getText();
 		if(Integer.parseInt(str)>0)
 			delai=Integer.parseInt(str);
-		if(e.getSource()==this.button)
-		{
-			this.setBackground(Color.BLACK);
-		}
-		
-		if(e.getSource()==this.button2)
-		{
-			this.setBackground(Color.WHITE);
-		}
-		
 		System.out.println(delai);
+		
 	}
 
 	@Override
@@ -87,15 +72,13 @@ public class Draw extends JPanel implements ActionListener {
 		String Chaine1; // will be used for string float conversion
 		String Chaine2; // will be used for string float conversion
 
-		// Graphics g = cnvs.getGraphics();
-		// Graphics g ;//
-		// g= cnvs.getGraphics();
-		// Graphics2D g2d = (Graphics2D)G;
-		lab.setText("Period : "+String.valueOf(delai)+" s");
+		lab.setForeground(Color.blue);
+		lab.setText("delai : "+String.valueOf(delai)+" s");
 		/// DRAWING
 		// The abscissa represent the time and the ordinate represent the temperature at
 		/// this moment
 		// COORDINATE SYSTEM
+		g.setColor(Color.BLUE);
 		g.drawLine(50, 50, 50, 500); // coordinate system - ordinate
 		g.drawLine(50, 50, 40, 60); // cross - ordinate
 		g.drawLine(50, 50, 60, 60); // cross - ordinate
@@ -125,7 +108,7 @@ public class Draw extends JPanel implements ActionListener {
 			g.drawLine(50,495-(int) Temperature.Tmax*5, 750,495-(int) Temperature.Tmax*5);
 			g.drawLine(50, 495-(int)Temperature.Tmin*5, 750,495-(int) Temperature.Tmin*5);
 			g.drawLine(50, 495-(int) avg*5, 750,495-(int) avg*5);
-			g.drawString("AVG " + avg + " Tmax " + Temperature.Tmax + " Tmin "+ Temperature.Tmin, 20,25);
+			g.drawString("AVG " + avg + " Tmax " + Temperature.Tmax + " Tmin "+ Temperature.Tmin, 500,550);
 		}
 		else
 		{
@@ -139,6 +122,7 @@ public class Draw extends JPanel implements ActionListener {
 				Y = (int) temp;
 				Color Color1 = new Color(0, 6, 255); // blue
 				g.setColor(Color1);
+				//g.fillOval(X, Y, 10, 10);
 				g.fillOval(45+i*35, 495-Y/200, 10, 10);
 				avg=avg+temp/1000;
 			}
@@ -146,9 +130,7 @@ public class Draw extends JPanel implements ActionListener {
 			g.drawLine(50,495-(int) Temperature.Tmax*5, 750,495-(int) Temperature.Tmax*5);
 			g.drawLine(50, 495-(int)Temperature.Tmin*5, 750,495-(int) Temperature.Tmin*5);
 			g.drawLine(50, 495-(int) avg*5, 750,495-(int) avg*5);
-			//String message = "AVG " + avg + " Tmax " + Temperature.Tmax + " Tmin "+ Temperature.Tmin;
-			//g.drawString(message, 50, 550);
-			g.drawString("AVG " + avg + " Tmax " + Temperature.Tmax + " Tmin "+ Temperature.Tmin, 500,550);
+			g.drawString("AVG: " + avg + " - Tmax: " + Temperature.Tmax + " - Tmin: "+ Temperature.Tmin, 500,550);
 		}
 	}
 	

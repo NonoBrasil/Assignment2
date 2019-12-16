@@ -23,9 +23,9 @@ public class Temperature {
 					Draw.tab_data[Draw.condition][0] = tab[0]; // date recovery
 					Draw.tab_data[Draw.condition][1] = tab[1]; // temperature recovery
 					if(Float.parseFloat(tab[1])/1000<Tmin)
-						Tmin=Float.parseFloat(tab[1])/1000;	//minimum value of the temperature
+						Tmin=Float.parseFloat(tab[1])/1000;	//minimum value of the temperature change
 					if(Float.parseFloat(tab[1])/1000>Tmax)
-						Tmax=Float.parseFloat(tab[1])/1000;	//maximum value of the temperature
+						Tmax=Float.parseFloat(tab[1])/1000;	//maximum value of the temperature change
 
 				} else {
 					for (int i = 0; i < 19; i++) // Data shift to leave the last row of the table empty
