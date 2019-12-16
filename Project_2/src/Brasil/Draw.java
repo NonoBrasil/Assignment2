@@ -85,6 +85,12 @@ public class Draw extends JPanel implements ActionListener {
 		g.drawLine(50, 500, 750, 500); // coordinate system - abscissa
 		g.drawLine(750, 500, 740, 490); // cross- abscissa
 		g.drawLine(750, 500, 740, 510); // cross - abscissa
+		
+		for(int counter=1; counter<20; counter++)
+		{
+			g.drawLine(50+counter*35, 500, 50+counter*35, 510); 
+			g.drawLine(50, 50+counter*(45/2), 60, 50+counter*(45/2));
+		}
 		//POINTS ON THE CURVE
 		if (condition < 20)
 		{
@@ -108,7 +114,7 @@ public class Draw extends JPanel implements ActionListener {
 			g.drawLine(50,495-(int) Temperature.Tmax*5, 750,495-(int) Temperature.Tmax*5);
 			g.drawLine(50, 495-(int)Temperature.Tmin*5, 750,495-(int) Temperature.Tmin*5);
 			g.drawLine(50, 495-(int) avg*5, 750,495-(int) avg*5);
-			g.drawString("AVG " + avg + " Tmax " + Temperature.Tmax + " Tmin "+ Temperature.Tmin, 500,550);
+			g.drawString("AVG: " + avg + "   -   Tmax: " + Temperature.Tmax + "   -   Tmin: "+ Temperature.Tmin, 500,550);
 		}
 		else
 		{
@@ -130,7 +136,7 @@ public class Draw extends JPanel implements ActionListener {
 			g.drawLine(50,495-(int) Temperature.Tmax*5, 750,495-(int) Temperature.Tmax*5);
 			g.drawLine(50, 495-(int)Temperature.Tmin*5, 750,495-(int) Temperature.Tmin*5);
 			g.drawLine(50, 495-(int) avg*5, 750,495-(int) avg*5);
-			g.drawString("AVG: " + avg + " - Tmax: " + Temperature.Tmax + " - Tmin: "+ Temperature.Tmin, 500,550);
+			g.drawString("AVG: " + avg + "   -   Tmax: " + Temperature.Tmax + "   -   Tmin: "+ Temperature.Tmin, 500,550);
 		}
 	}
 	
